@@ -224,7 +224,8 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 
 
 			case TITLE_MENU:
-				gw.getGameMenu().setMousePosition(gw.getMousePosition());
+
+
 				break;
 		}
 	}

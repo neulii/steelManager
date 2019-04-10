@@ -2,7 +2,6 @@ package myJava.neulii.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class GameMenu implements GameObject{
 
@@ -10,13 +9,9 @@ public class GameMenu implements GameObject{
 
     private int buttonWidth = 180;
     private int buttonHeight = 60;
-    private int buttonBetween = 40;
+    private int buttonDistance = 30;
 
     private ArrayList<MenuButton> menuButtons;
-
-    private Vector<Rectangle> buttons;
-
-    private int buttonDistance = 30;
 
     private int leftMenu;
     private int topMenu = 150;
@@ -31,6 +26,10 @@ public class GameMenu implements GameObject{
     @Override
     public void update(long dT) {
 
+        for (MenuButton button: menuButtons) {
+            button.setMousePos(gw.getMousePos());
+            button.update(dT);
+        }
 
     }
 
@@ -58,20 +57,6 @@ public class GameMenu implements GameObject{
 //
 //        if(buttonEnd.contains(p)){
 //            System.exit(0);
-//        }
-
-    }
-
-    public void setMousePosition(Point p){
-
-//        for (Rectangle r : buttons) {
-//            if(r.contains(p)){
-//
-//
-//                System.out.println("inside");
-//
-//
-//            }
 //        }
 
     }

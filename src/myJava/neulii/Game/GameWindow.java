@@ -179,6 +179,8 @@ public class GameWindow extends Canvas implements GameObject{
 			case TITLE_MENU:
 
 				gameMenu.update(dT);
+
+
 				break;
 
 			case MAINGAME:

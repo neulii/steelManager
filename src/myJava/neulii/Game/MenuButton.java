@@ -4,14 +4,23 @@ import java.awt.*;
 
 public class MenuButton implements GameObject {
 
-    private Rectangle buttonRect;
     private int x;
     private int y;
     private int width;
     private int height;
 
-    private Color textColor;
-    private Color backgroundColor;
+    private Point mousePos;
+
+    private boolean isHoovered;
+
+    private Color normalTextColor;
+    private Color normalBackgroundColor;
+
+    private Color textHooverColor;
+    private Color backgroundHooverColor;
+
+    private Color drawingBackgroundColor;
+    private Color drawingTextColor;
 
     private String buttonText;
 
@@ -22,14 +31,25 @@ public class MenuButton implements GameObject {
         this.width = width;
         this.height = height;
         this.buttonText = buttonText;
-        this.backgroundColor = Color.gray;
-        this.textColor = Color.black;
+
+        this.normalBackgroundColor = Color.gray;
+        this.normalTextColor = Color.black;
+
+        this.backgroundHooverColor = Color.ORANGE;
+        this.textHooverColor = Color.white;
+
+
+        this.mousePos = new Point(0,0);
+
+        this.drawingBackgroundColor = normalBackgroundColor;
+        this.drawingTextColor = normalTextColor;
+
     }
 
 
     @Override
     public void render(Graphics g) {
-        g.setColor(backgroundColor);
+        g.setColor(drawingBackgroundColor);
         g.fillRect(x,y,width,height);
 
         FontMetrics fontMetrics = g.getFontMetrics(g.getFont());
@@ -39,7 +59,7 @@ public class MenuButton implements GameObject {
         int xString = x+ (width-textWidth)/2;
         int yString = y +(height - textHeight)/2 + fontMetrics.getAscent();
 
-        g.setColor(textColor);
+        g.setColor(drawingTextColor);
         g.drawString(buttonText,xString,yString);
 
     }
@@ -47,13 +67,51 @@ public class MenuButton implements GameObject {
     @Override
     public void update(long dT) {
 
+        //System.out.println(mousePos);
+        if (isPointInside(mousePos)){
+            if(!isHoovered){
+                mouseEnter();
+            }
+        }
+
+        if (!isPointInside(mousePos)){
+            if(isHoovered) {
+                mouseLeave();
+            }
+        }
     }
 
     public void setBackgroundColor(Color color){
-        backgroundColor = color;
+        normalBackgroundColor = color;
     }
 
     public void setTextColor(Color color){
-        textColor = color;
+        normalTextColor = color;
+    }
+
+    public void mouseEnter(){
+        isHoovered = true;
+        drawingTextColor = textHooverColor;
+        drawingBackgroundColor = backgroundHooverColor;
+    }
+
+    public void mouseLeave(){
+        isHoovered=false;
+
+        drawingTextColor = normalTextColor;
+        drawingBackgroundColor = normalBackgroundColor;
+
+    }
+
+    public boolean isPointInside(Point p){
+        Rectangle rec = new Rectangle(x,y,width,height);
+        return rec.intersects(p.getX(),p.getY(),1,1);
+    }
+
+    public void setMousePos(Point p){
+
+        if(p!=null) {
+            this.mousePos = p;
+        }
     }
 }
