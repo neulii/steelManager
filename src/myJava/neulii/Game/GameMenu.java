@@ -30,7 +30,6 @@ public class GameMenu implements GameObject{
             button.setMousePos(gw.getMousePos());
             button.update(dT);
         }
-
     }
 
     @Override
@@ -38,7 +37,6 @@ public class GameMenu implements GameObject{
 
         for (MenuButton button : menuButtons) {
             button.render(g);
-
         }
     }
 
@@ -50,14 +48,29 @@ public class GameMenu implements GameObject{
 
     public void clickedAt(Point p){
 
-//        if(buttonNewGame.contains(p)){
-//            gw.setGameState(GameState.MAINGAME);
-//
-//        }
-//
-//        if(buttonEnd.contains(p)){
-//            System.exit(0);
-//        }
+        for(MenuButton button: menuButtons){
+            if(button.isPointInside(p)){
+
+                switch (button.getButtonText()){
+
+                    case "Neues Spiel":
+                        gw.setGameState(GameState.MAINGAME);
+
+                        break;
+
+                    case "Spiel Laden":
+
+                        break;
+
+                    case "Spiel beenden":
+
+                        System.exit(0);
+
+                        break;
+                }
+            }
+
+        }
 
     }
 }

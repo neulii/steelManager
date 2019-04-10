@@ -91,23 +91,10 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 
 				case TITLE_MENU:
 
-
 					gw.getGameMenu().clickedAt(gw.getMousePos());
 
-
-//					//Beenden button
-//					if(gw.getGameMenu().getButtonEnd().contains(gw.getMousePos())){
-//						System.exit(0);
-//					}
-//
-
-
 					break;
-
-
 			}
-
-
 		}
 
 		//Right Mousebutton
@@ -209,7 +196,6 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 						if (activeTile != null) {
 							activeTile.setHoovered(false);
 							activeTile.setHooveredBorderColor(Color.blue);
-
 						}
 					}
 				}
@@ -222,9 +208,7 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 				}
 				break;
 
-
 			case TITLE_MENU:
-
 
 				break;
 		}

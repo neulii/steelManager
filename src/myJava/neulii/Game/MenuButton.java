@@ -114,4 +114,8 @@ public class MenuButton implements GameObject {
             this.mousePos = p;
         }
     }
+
+    public String getButtonText(){
+        return buttonText;
+    }
 }
