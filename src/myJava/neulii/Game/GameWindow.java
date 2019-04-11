@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 public class GameWindow extends Canvas implements GameObject{
 
 	private GameMenu gameMenu;
+	private GameMenu inGameMenu;
+
 	private GameState gameState;
 
 	private static final long serialVersionUID = 1L;
@@ -64,6 +66,13 @@ public class GameWindow extends Canvas implements GameObject{
 		gameMenu.addMenuButton("Neues Spiel");
 		gameMenu.addMenuButton("Spiel Laden");
 		gameMenu.addMenuButton("Spiel beenden");
+
+		inGameMenu = new GameMenu(this);
+		inGameMenu.addMenuButton("zurück zum Spiel");
+		inGameMenu.addMenuButton("Spiel speichern");
+		inGameMenu.addMenuButton("Spiel beenden");
+
+
 
 
 //		gameState = GameState.MAINGAME;
@@ -162,6 +171,9 @@ public class GameWindow extends Canvas implements GameObject{
 				break;
 
 			case PAUSED:
+
+				inGameMenu.render(g);
+
 				break;
 		}
 
@@ -192,6 +204,7 @@ public class GameWindow extends Canvas implements GameObject{
 				break;
 
 			case PAUSED:
+				inGameMenu.update(dT);
 				break;
 		}
 	}

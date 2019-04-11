@@ -219,44 +219,65 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 		
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		mouseMoved(me);
+		@Override
+		public void keyPressed(KeyEvent e) {
+			mouseMoved(me);
 
-		//when pressed F12 activate debugview
-		
-		if(e.getKeyCode()==KeyEvent.VK_F12)
-			gui.switchDebugView();
+			switch (gw.getGameState()){
 
-		//show market / bank
-		if(e.getKeyCode()==KeyEvent.VK_B) {
-			
-			MarketWindow marketWindow = new MarketWindow(gw.getMaterialManager(),gw.getFrame());
-			marketWindow.show();
-			
-		}
-		
-		String cheatInput = "";
-		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-			cheatInput = JOptionPane.showInputDialog(gw, "Cheat-Code eingeben:", "Cheat Konsole", JOptionPane.INFORMATION_MESSAGE);
-			CheatAction.doCheat(gw, cheatInput);
-		}
-		
-		if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D) {
-			gw.getMap().moveRight(true, gw);
-		}
-		
-		if(e.getKeyCode()==KeyEvent.VK_LEFT || e.getKeyCode()==KeyEvent.VK_A) {
-			gw.getMap().moveLeft(true,gw);
-		}
-		
-		if(e.getKeyCode()==KeyEvent.VK_UP || e.getKeyCode()==KeyEvent.VK_W) {
-			gw.getMap().moveUp(true,gw);
-		}
-		
-		if(e.getKeyCode()==KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S) {
-			gw.getMap().moveDown(true,gw);
-		}
+				case PAUSED:
+
+					if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+						gw.setGameState(GameState.MAINGAME);
+					}
+
+					break;
+
+
+				case MAINGAME:
+
+					//when pressed F12 activate debugview
+
+					if(e.getKeyCode()==KeyEvent.VK_F12)
+						gui.switchDebugView();
+
+					//show market / bank
+					if(e.getKeyCode()==KeyEvent.VK_B) {
+
+						MarketWindow marketWindow = new MarketWindow(gw.getMaterialManager(),gw.getFrame());
+						marketWindow.show();
+
+					}
+
+					String cheatInput = "";
+					if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+						cheatInput = JOptionPane.showInputDialog(gw, "Cheat-Code eingeben:", "Cheat Konsole", JOptionPane.INFORMATION_MESSAGE);
+						CheatAction.doCheat(gw, cheatInput);
+					}
+
+					if(e.getKeyCode()==KeyEvent.VK_ESCAPE){
+						gw.setGameState(GameState.PAUSED);
+
+					}
+
+					if(e.getKeyCode()==KeyEvent.VK_RIGHT || e.getKeyCode()==KeyEvent.VK_D) {
+						gw.getMap().moveRight(true, gw);
+					}
+
+					if(e.getKeyCode()==KeyEvent.VK_LEFT || e.getKeyCode()==KeyEvent.VK_A) {
+						gw.getMap().moveLeft(true,gw);
+					}
+
+					if(e.getKeyCode()==KeyEvent.VK_UP || e.getKeyCode()==KeyEvent.VK_W) {
+						gw.getMap().moveUp(true,gw);
+					}
+
+					if(e.getKeyCode()==KeyEvent.VK_DOWN || e.getKeyCode()==KeyEvent.VK_S) {
+						gw.getMap().moveDown(true,gw);
+					}
+					break;
+			}
+
 	}
 
 	@Override
