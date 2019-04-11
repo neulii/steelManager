@@ -118,4 +118,8 @@ public class MenuButton implements GameObject {
     public String getButtonText(){
         return buttonText;
     }
+
+    public void setX(int x){
+        this.x = x;
+    }
 }

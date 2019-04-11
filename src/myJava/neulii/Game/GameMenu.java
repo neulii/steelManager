@@ -26,7 +26,10 @@ public class GameMenu implements GameObject{
     @Override
     public void update(long dT) {
 
+        leftMenu = (gw.getWidth()-buttonWidth) /2;
+
         for (MenuButton button: menuButtons) {
+            button.setX(leftMenu);
             button.setMousePos(gw.getMousePos());
             button.update(dT);
         }
