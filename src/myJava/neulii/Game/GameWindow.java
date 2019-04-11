@@ -220,14 +220,23 @@ public class GameWindow extends Canvas implements GameObject{
 	
 	public void initializeObjects() {
 		mm = new MaterialManager();
-		
+
+		long startTime = System.currentTimeMillis();
+		long timeElapsed = 0;
+
 		MapStringGenerator mapStringGen = new MapStringGenerator(MAPWIDTH, MAPHEIGHT);
-		
 		mapStringGen.setMapStructure(1,1);
 		mapString = mapStringGen.getMapString();
-		
+
 		gameMap = new Map(MAPWIDTH,MAPHEIGHT,TILE_WIDTH,TILE_HEIGHT,mapString);
 		gameMap.setGameWindow(this);
+
+
+		timeElapsed = System.currentTimeMillis()-startTime;
+		System.out.println("Map generated in : " + timeElapsed + " ms");
+
+
+
 		gui = new GUI(this, mm);
 		mousePosition = new Point(0,0);
 	}
