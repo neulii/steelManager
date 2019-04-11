@@ -17,36 +17,42 @@ public class PausedMenu extends GameMenu {
 
         for(MenuButton button: menuButtons){
             if(button.isPointInside(p)){
+                //System.out.println(button.getButtonText());
 
                 switch (button.getButtonText()){
 
                     case "zurück zum Spiel":
+
                         gw.setGameState(GameState.MAINGAME);
-                        break;
+                         break;
+
                     case "Spiel speichern":
 
-                        String filename = "savegame.txt";
+                        System.out.println("speichern");
 
-                        FileOutputStream fos = null;
-                        ObjectOutputStream out = null;
-
-
-                        try {
-                            fos = new FileOutputStream(filename);
-                            out = new ObjectOutputStream(fos);
-
-
-                            out.writeObject(gw.getMap());
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+//                        String filename = "savegame.txt";
+//
+//                        FileOutputStream fos = null;
+//                        ObjectOutputStream out = null;
+//
+//
+//                        try {
+//                            fos = new FileOutputStream(filename);
+//                            out = new ObjectOutputStream(fos);
+//
+//
+//                            out.writeObject(gw.getMap());
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
 
                         break;
 
                     case "Spiel beenden":
+
                         System.exit(0);
                         break;
 

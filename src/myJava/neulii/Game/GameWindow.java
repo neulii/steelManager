@@ -291,4 +291,8 @@ public class GameWindow extends Canvas implements GameObject{
 	public GameMenu getGameMenu() {
 		return gameMenu;
 	}
+
+	public PausedMenu getPausedMenu(){
+		return pausedMenu;
+	}
 }

@@ -18,6 +18,7 @@ public class TitleMenu extends GameMenu{
                     case "Neues Spiel":
                         gw.setGameState(GameState.MAINGAME);
 
+
                         break;
 
                     case "Spiel Laden":
