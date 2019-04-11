@@ -4,16 +4,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class GameMenu implements GameObject{
+public abstract class GameMenu implements GameObject{
 
     private BufferedImage backgroundImage;
-    private GameWindow gw;
+    protected GameWindow gw;
 
     private int buttonWidth = 180;
     private int buttonHeight = 60;
     private int buttonDistance = 30;
 
-    private ArrayList<MenuButton> menuButtons;
+    protected ArrayList<MenuButton> menuButtons;
 
     private int leftMenu;
     private int topMenu = 150;
@@ -56,31 +56,5 @@ public class GameMenu implements GameObject{
         menuButtons.add(tempButton);
     }
 
-    public void clickedAt(Point p){
-
-        for(MenuButton button: menuButtons){
-            if(button.isPointInside(p)){
-
-                switch (button.getButtonText()){
-
-                    case "Neues Spiel":
-                        gw.setGameState(GameState.MAINGAME);
-
-                        break;
-
-                    case "Spiel Laden":
-
-                        break;
-
-                    case "Spiel beenden":
-
-                        System.exit(0);
-
-                        break;
-                }
-            }
-
-        }
-
-    }
+    public abstract void clickedAt(Point p);
 }

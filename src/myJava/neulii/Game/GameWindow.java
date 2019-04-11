@@ -7,14 +7,13 @@ import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
 public class GameWindow extends Canvas implements GameObject{
 
-	private GameMenu gameMenu;
-	private GameMenu inGameMenu;
+	private TitleMenu gameMenu;
+	private PausedMenu pausedMenu;
 
 	private GameState gameState;
 
@@ -53,7 +52,6 @@ public class GameWindow extends Canvas implements GameObject{
 
 	public GameWindow(int width, int height) {
 
-
 		windowWidth = 20 * TILE_WIDTH;
 		windowHeight =15 * TILE_HEIGHT;
 
@@ -62,22 +60,17 @@ public class GameWindow extends Canvas implements GameObject{
 		initializeObjects();
 		initializeWindow();
 
-		gameMenu = new GameMenu(this);
+		gameMenu = new TitleMenu(this);
 		gameMenu.addMenuButton("Neues Spiel");
 		gameMenu.addMenuButton("Spiel Laden");
 		gameMenu.addMenuButton("Spiel beenden");
 
-		inGameMenu = new GameMenu(this);
-		inGameMenu.addMenuButton("zurück zum Spiel");
-		inGameMenu.addMenuButton("Spiel speichern");
-		inGameMenu.addMenuButton("Spiel beenden");
+		pausedMenu = new PausedMenu(this);
+		pausedMenu.addMenuButton("zurück zum Spiel");
+		pausedMenu.addMenuButton("Spiel speichern");
+		pausedMenu.addMenuButton("Spiel beenden");
 
-
-
-
-//		gameState = GameState.MAINGAME;
 		gameState = GameState.TITLE_MENU;
-
 
 		gameWindow.setVisible(true);
 		gameWindow.setResizable(true);
@@ -172,13 +165,12 @@ public class GameWindow extends Canvas implements GameObject{
 
 			case PAUSED:
 
-				inGameMenu.render(g);
+				pausedMenu.render(g);
 
 				break;
 		}
 
 
-	
 		//==================     End of drawing zone      ===================== 
 		
 		g.dispose();
@@ -193,7 +185,6 @@ public class GameWindow extends Canvas implements GameObject{
 
 				gameMenu.update(dT);
 
-
 				break;
 
 			case MAINGAME:
@@ -204,7 +195,7 @@ public class GameWindow extends Canvas implements GameObject{
 				break;
 
 			case PAUSED:
-				inGameMenu.update(dT);
+				pausedMenu.update(dT);
 				break;
 		}
 	}
@@ -221,7 +212,6 @@ public class GameWindow extends Canvas implements GameObject{
 		this.setMinimumSize(windowSize);
 		this.setFocusable(true);
 
-		
 		gameWindow.add(this);		
 		gameWindow.pack();
 		inputListener = new InputListener(this,gui);
@@ -246,11 +236,8 @@ public class GameWindow extends Canvas implements GameObject{
 		gameMap = new Map(MAPWIDTH,MAPHEIGHT,TILE_WIDTH,TILE_HEIGHT,mapString);
 		gameMap.setGameWindow(this);
 
-
 		timeElapsed = System.currentTimeMillis()-startTime;
 		System.out.println("Map generated in : " + timeElapsed + " ms");
-
-
 
 		gui = new GUI(this, mm);
 		mousePosition = new Point(0,0);
