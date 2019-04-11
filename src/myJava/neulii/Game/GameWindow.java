@@ -198,7 +198,7 @@ public class GameWindow extends Canvas implements GameObject{
 	
 	//initialize Window
 	public void initializeWindow() {
-		gameWindow = new JFrame("Game");
+		gameWindow = new JFrame("steelManager");
 		gameWindow.setSize(windowWidth, windowHeight);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameWindow.setResizable(false);
