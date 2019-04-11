@@ -1,6 +1,8 @@
 package myJava.neulii.Game;
 
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class PausedMenu extends GameMenu {
 
@@ -20,6 +22,12 @@ public class PausedMenu extends GameMenu {
                         gw.setGameState(GameState.MAINGAME);
                         break;
                     case "Spiel speichern":
+
+                        String filename = "savegame.txt";
+
+                        FileOutputStream fos = null;
+                        ObjectOutputStream out = null;
+
 
                         break;
 
