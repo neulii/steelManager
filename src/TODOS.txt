@@ -22,8 +22,6 @@ TODOS
 
 - speichern / laden
 
-- menu
-
 - balancing der produktion
 
 - canceling build mit q-taste
