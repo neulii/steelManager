@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -36,7 +37,7 @@ public class GameWindow extends Canvas implements GameObject{
 	private JFrame gameWindow;
 	private BufferStrategy bs;
 	private Graphics graphics;
-	
+
 	private MaterialManager mm;
 	
 	private Point mousePosition;
@@ -219,6 +220,7 @@ public class GameWindow extends Canvas implements GameObject{
 	}
 	
 	public void initializeObjects() {
+
 		mm = new MaterialManager();
 
 		long startTime = System.currentTimeMillis();

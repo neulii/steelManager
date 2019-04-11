@@ -1,10 +1,12 @@
 package myJava.neulii.Game;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class GameMenu implements GameObject{
 
+    private BufferedImage backgroundImage;
     private GameWindow gw;
 
     private int buttonWidth = 180;
@@ -17,6 +19,8 @@ public class GameMenu implements GameObject{
     private int topMenu = 150;
 
     public GameMenu(GameWindow gameWindow){
+
+        backgroundImage = ImageLoader.loadImage("/steel_background.jpg");
 
         this.gw = gameWindow;
         leftMenu = (gw.getWidth()-buttonWidth) /2;
@@ -37,6 +41,9 @@ public class GameMenu implements GameObject{
 
     @Override
     public void render(Graphics g) {
+
+        g.drawImage(backgroundImage,0,0,gw.getWidth(),gw.getHeight(),null);
+
 
         for (MenuButton button : menuButtons) {
             button.render(g);
