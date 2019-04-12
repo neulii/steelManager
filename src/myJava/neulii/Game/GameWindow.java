@@ -7,10 +7,11 @@ import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferStrategy;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 
-public class GameWindow extends Canvas implements GameObject{
+public class GameWindow extends Canvas implements GameObject, Serializable {
 
 	private TitleMenu gameMenu;
 	private PausedMenu pausedMenu;

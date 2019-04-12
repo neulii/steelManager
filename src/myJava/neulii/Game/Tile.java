@@ -3,8 +3,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Tile implements GameObject {
+public class Tile implements GameObject, Serializable {
 	
 	private int x;
 	private int y;

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  *
  */
 
-public class Map implements GameObject {
+public class Map implements GameObject, Serializable{
 
 	//private int[] mapString;
 	
@@ -30,16 +31,16 @@ public class Map implements GameObject {
 	private boolean moveUp;
 	private boolean moveDown;
 	
-	private GameWindow gw;
+	private transient GameWindow gw;
 	
 	private int scrollSpeed = 450;
 	
-	private ArrayList<Tile> mapTiles = new ArrayList<Tile>();
-	private BufferedImage fieldImage;
+	private ArrayList<Tile> mapTiles = new ArrayList<>();
+	//private BufferedImage fieldImage;
 	
-	BufferedImage grassFieldImage;
-	BufferedImage coalFieldImage;
-	BufferedImage ironOreImage;
+//	private BufferedImage grassFieldImage;
+//	private BufferedImage coalFieldImage;
+//	private BufferedImage ironOreImage;
 	
 	
 	/**
@@ -56,10 +57,10 @@ public class Map implements GameObject {
 //		this.fieldWidth = fieldWidth;
 //		
 //		this.mapString = mapString;
-		
-		grassFieldImage = ImageLoader.loadImage("/grassField.png");
-		coalFieldImage = ImageLoader.loadImage("/coalField.png");
-		ironOreImage = ImageLoader.loadImage("/iron_oreField.png");
+		BufferedImage fieldImage = null;
+		BufferedImage grassFieldImage = ImageLoader.loadImage("/grassField.png");
+		BufferedImage coalFieldImage = ImageLoader.loadImage("/coalField.png");
+		BufferedImage ironOreImage = ImageLoader.loadImage("/iron_oreField.png");
 		
 		for (int i = 0; i < width * height; i++) {
 		

@@ -30,23 +30,23 @@ public class PausedMenu extends GameMenu {
 
                         System.out.println("speichern");
 
-//                        String filename = "savegame.txt";
+                        String filename = "savegame.txt";
 //
-//                        FileOutputStream fos = null;
-//                        ObjectOutputStream out = null;
-//
-//
-//                        try {
-//                            fos = new FileOutputStream(filename);
-//                            out = new ObjectOutputStream(fos);
-//
-//
-//                            out.writeObject(gw.getMap());
-//                        } catch (FileNotFoundException e) {
-//                            e.printStackTrace();
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
+                        FileOutputStream fos = null;
+                        ObjectOutputStream out = null;
+
+
+                        try {
+                            fos = new FileOutputStream(filename);
+                            out = new ObjectOutputStream(fos);
+
+
+                            out.writeObject(gw.getMap());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
 
                         break;

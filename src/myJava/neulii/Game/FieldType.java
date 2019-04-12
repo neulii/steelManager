@@ -1,7 +1,9 @@
 package myJava.neulii.Game;
 
+import java.io.Serializable;
+
 //FieldType enum
-public enum FieldType {
+public enum FieldType implements Serializable {
 	GRASS(0),
 	COAL(1),
 	IRON_ORE(2),
