@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class Map implements GameObject, Serializable{
 
-	//private int[] mapString;
+	private int[] mapString;
 	
 	private int width; // width in fields
 //	private int height; // width in fields
@@ -31,7 +31,7 @@ public class Map implements GameObject, Serializable{
 	private boolean moveUp;
 	private boolean moveDown;
 	
-	private transient GameWindow gw;
+	private GameWindow gw;
 	
 	private int scrollSpeed = 450;
 	
@@ -56,7 +56,7 @@ public class Map implements GameObject, Serializable{
 //		this.fieldHeight = fieldHeight;
 //		this.fieldWidth = fieldWidth;
 //		
-//		this.mapString = mapString;
+		this.mapString = mapString;
 		BufferedImage fieldImage = null;
 		BufferedImage grassFieldImage = ImageLoader.loadImage("/grassField.png");
 		BufferedImage coalFieldImage = ImageLoader.loadImage("/coalField.png");
@@ -311,5 +311,10 @@ public class Map implements GameObject, Serializable{
 	
 	public void setGameWindow(GameWindow gw) {
 		this.gw = gw;
+	}
+
+	public int[] getMapString(){
+
+		return mapString;
 	}
 }

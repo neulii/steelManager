@@ -1,10 +1,8 @@
 package myJava.neulii.Game;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.util.ArrayList;
 
 public class PausedMenu extends GameMenu {
 
@@ -30,6 +28,12 @@ public class PausedMenu extends GameMenu {
 
                         System.out.println("speichern");
 
+                        ArrayList<Serializable> savingObjects = new ArrayList<>();
+
+                        savingObjects.add(gw.getMap().getMapString());
+                        savingObjects.add(gw.getMaterialManager());
+
+
                         String filename = "savegame.txt";
 //
                         FileOutputStream fos = null;
@@ -41,7 +45,7 @@ public class PausedMenu extends GameMenu {
                             out = new ObjectOutputStream(fos);
 
 
-                            out.writeObject(gw.getMap());
+                            out.writeObject(savingObjects);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } catch (IOException e) {

@@ -1,6 +1,8 @@
 package myJava.neulii.Game;
 
-public class MaterialManager {
+import java.io.Serializable;
+
+public class MaterialManager implements Serializable {
 	
 	private int money;
 	private int coal;
