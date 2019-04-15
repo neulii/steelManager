@@ -82,6 +82,14 @@ public class MaterialManager implements Serializable {
 	public int getironOreWorth() {
 		return iron_oreWorth;
 	}
+
+	public void viewToConsole(){
+		System.out.println("money:   " + money);
+		System.out.println("coal:    " + coal);
+		System.out.println("ironOre: " + iron_ore);
+
+
+	}
 	
 	
 	
