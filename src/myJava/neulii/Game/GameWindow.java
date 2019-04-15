@@ -75,6 +75,7 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 		pausedMenu = new PausedMenu(this);
 		pausedMenu.addMenuButton("zurück zum Spiel");
 		pausedMenu.addMenuButton("Spiel speichern");
+		pausedMenu.addMenuButton(("Spiel laden"));
 		pausedMenu.addMenuButton("Spiel beenden");
 
 		gameState = GameState.TITLE_MENU;
@@ -275,6 +276,10 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 		mapString = (int[]) savedObjects.get(0);
 
 		mm = (MaterialManager) savedObjects.get(1);
+
+		mm.viewToConsole();
+
+		System.out.println("loaded savedata");
 	}
 
 	public void loadGame(){
@@ -283,7 +288,7 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 
 		gameMap = new Map(MAPWIDTH,MAPHEIGHT,TILE_WIDTH,TILE_HEIGHT,mapString);
 		gameMap.setGameWindow(this);
-		mapString.toString();
+
 		System.out.println("loadgame");
 
 		setGameState(GameState.MAINGAME);

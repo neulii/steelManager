@@ -55,6 +55,11 @@ public class PausedMenu extends GameMenu {
 
                         break;
 
+                    case "Spiel laden":
+                        System.out.println("laden");
+                        gw.loadGame();
+                        break;
+
                     case "Spiel beenden":
 
                         System.exit(0);
