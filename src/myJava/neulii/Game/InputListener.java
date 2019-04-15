@@ -217,6 +217,7 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 					if (activeTile != null)
 						activeTile.setHoovered(false);
 					newTile.setHoovered(false);
+
 				}
 				break;
 

@@ -1,5 +1,7 @@
 package myJava.neulii.Game;
 
+import myJava.neulii.Lib.Utils;
+
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class PausedMenu extends GameMenu {
                         savingObjects.add(gw.getMap().getMapString());
                         savingObjects.add(gw.getMaterialManager());
 
+                        Utils.printArrayToConsole(gw.getMap().getMapString());
 
                         String filename = "savegame.txt";
 //
