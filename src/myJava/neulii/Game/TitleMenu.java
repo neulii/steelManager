@@ -26,9 +26,10 @@ public class TitleMenu extends GameMenu{
 
                     case "Spiel Laden":
 
-                        MapStringGenerator generator = new MapStringGenerator(20,20);
+                        //MapStringGenerator generator = new MapStringGenerator(20,20);
+                        System.out.println("laden");
+                        gw.loadGame();
 
-                        gw.loadGame(new MaterialManager(),generator.getMapString());
 
 
 

@@ -9,7 +9,8 @@ import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferStrategy;
-import java.io.Serializable;
+import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -253,23 +254,42 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 
 	public void loadSavingData(){
 
+		ArrayList<Serializable> savedObjects = new ArrayList<>();
+
+		try {
+			FileInputStream fis = new FileInputStream("savegame.txt");
+			ObjectInputStream in = new ObjectInputStream(fis);
+
+			savedObjects = (ArrayList<Serializable>) in.readObject();
+
+			System.out.println(savedObjects.size());
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		mapString = (int[]) savedObjects.get(0);
+
+		mm = (MaterialManager) savedObjects.get(1);
 	}
 
-	public void loadGame(MaterialManager mm, int [] mapString){
-
-		this.mm = mm;
-		this.mapString = mapString;
+	public void loadGame(){
 
 		loadSavingData();
 
-		MapStringGenerator mapStringGen = new MapStringGenerator(MAPWIDTH, MAPHEIGHT);
-		mapStringGen.setMapStructure(1,20);
-		mapString = mapStringGen.getMapString();
-
 		gameMap = new Map(MAPWIDTH,MAPHEIGHT,TILE_WIDTH,TILE_HEIGHT,mapString);
 		gameMap.setGameWindow(this);
+		mapString.toString();
+		System.out.println("loadgame");
 
 		setGameState(GameState.MAINGAME);
+
+
+
 
 	}
 	
