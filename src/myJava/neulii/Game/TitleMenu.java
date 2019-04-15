@@ -1,5 +1,7 @@
 package myJava.neulii.Game;
 
+import javafx.scene.paint.Material;
+
 import java.awt.*;
 
 public class TitleMenu extends GameMenu{
@@ -16,12 +18,19 @@ public class TitleMenu extends GameMenu{
                 switch (button.getButtonText()){
 
                     case "Neues Spiel":
-                        gw.setGameState(GameState.MAINGAME);
 
+                        gw.startNewGame();
+                        gw.setGameState(GameState.MAINGAME);
 
                         break;
 
                     case "Spiel Laden":
+
+                        MapStringGenerator generator = new MapStringGenerator(20,20);
+
+                        gw.loadGame(new MaterialManager(),generator.getMapString());
+
+
 
                         break;
 

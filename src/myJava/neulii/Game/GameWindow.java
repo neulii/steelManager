@@ -1,5 +1,7 @@
 package myJava.neulii.Game;
 
+import jdk.nashorn.internal.objects.NativeArray;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -58,7 +60,10 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 
 		windowSize = new Dimension(width, height);
 
-		initializeObjects();
+		//initializeObjects();
+		mm = new MaterialManager();
+		gui = new GUI(this, mm);
+
 		initializeWindow();
 
 		gameMenu = new TitleMenu(this);
@@ -222,10 +227,12 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 		
 		gameWindow.setLocationRelativeTo(null);
 	}
-	
-	public void initializeObjects() {
 
-		mm = new MaterialManager();
+
+
+
+
+	public void startNewGame() {
 
 		long startTime = System.currentTimeMillis();
 		long timeElapsed = 0;
@@ -240,8 +247,30 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 		timeElapsed = System.currentTimeMillis()-startTime;
 		System.out.println("Map generated in : " + timeElapsed + " ms");
 
-		gui = new GUI(this, mm);
 		mousePosition = new Point(0,0);
+
+	}
+
+	public void loadSavingData(){
+
+	}
+
+	public void loadGame(MaterialManager mm, int [] mapString){
+
+		this.mm = mm;
+		this.mapString = mapString;
+
+		loadSavingData();
+
+		MapStringGenerator mapStringGen = new MapStringGenerator(MAPWIDTH, MAPHEIGHT);
+		mapStringGen.setMapStructure(1,20);
+		mapString = mapStringGen.getMapString();
+
+		gameMap = new Map(MAPWIDTH,MAPHEIGHT,TILE_WIDTH,TILE_HEIGHT,mapString);
+		gameMap.setGameWindow(this);
+
+		setGameState(GameState.MAINGAME);
+
 	}
 	
 	public int getActualFrames() {

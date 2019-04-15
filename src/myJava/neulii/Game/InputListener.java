@@ -28,91 +28,99 @@ public class InputListener extends MouseAdapter implements MouseInputListener, K
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-		Tile tile = gw.getMap().getTileFromCoordinate(e.getX(), e.getY());		
-	
-		//left Mousebutton
-		if(e.getButton()==MouseEvent.BUTTON1) {
 
 
-			switch (gw.getGameState()) {
 
-				case MAINGAME:
 
-					//when mouse is over menu
-					if (gw.getMouseOverMenu()) {
-						if (gui.getElementMarked() == gui.getHooveredElement())
-							gui.clearMarkedTile();
-						else
-							gui.setHooveredTileMarked();
-					}
 
-					//when mouse is not in menu
-					if (!gw.getMouseOverMenu()) {
 
-						//when buildable on field
-						if (gui.getElementMarked() != null) {
+				switch (gw.getGameState()) {
 
-							//when tile can build on actual field and money is enough
-							if (canBuildOnActualField && (gui.getElementMarked().getCostOfTile() <= gw.getMaterialManager().getMoney())) {
+					case MAINGAME:
 
-								//tile = new Tile(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight(), gui.getElementMarked().getFieldType(), gui.getElementMarked().getImage());
+						Tile tile = gw.getMap().getTileFromCoordinate(e.getX(), e.getY());
 
-								changeingTile = gui.getElementMarked().getImage();
+						//left Mousebutton
+						if (e.getButton() == MouseEvent.BUTTON1) {
 
-								Tile newTile;
+							//when mouse is over menu
+							if (gw.getMouseOverMenu()) {
+								if (gui.getElementMarked() == gui.getHooveredElement())
+									gui.clearMarkedTile();
+								else
+									gui.setHooveredTileMarked();
+							}
 
-								//new Type of Tile is furnace
-								if (gui.getElementMarked() instanceof Production_Furnace) {
-									newTile = new Production_Furnace(tile, gui.getElementMarked().getFieldType(), gw.getMaterialManager());
-								} else
-									newTile = new ProductionTile(tile, gui.getElementMarked().getFieldType(), gw.getMaterialManager());
+							//when mouse is not in menu
+							if (!gw.getMouseOverMenu()) {
 
-								//newTile.setHooveredBorderThickness(2);
+								//when buildable on field
+								if (gui.getElementMarked() != null) {
 
-								newTile.setHooveredBorderColor(Color.blue);
-								newTile.setHoovered(true);
+									//when tile can build on actual field and money is enough
+									if (canBuildOnActualField && (gui.getElementMarked().getCostOfTile() <= gw.getMaterialManager().getMoney())) {
 
-								gw.getMap().changeField(tile, newTile);
+										//tile = new Tile(tile.getX(), tile.getY(), tile.getWidth(), tile.getHeight(), gui.getElementMarked().getFieldType(), gui.getElementMarked().getImage());
 
-	//						tile.setImage(gui.getElementMarked().getImage());
-	//						tile.setFieldType(gui.getElementMarked().getFieldType());
-	//
-								gw.getMaterialManager().subMoney(((ProductionTile) newTile).getCostOfTile());
+										changeingTile = gui.getElementMarked().getImage();
 
-								gui.clearMarkedTile();
-								changeingTile = null;
-								tile.setHooveredBorderColor(Color.blue);
+										Tile newTile;
+
+										//new Type of Tile is furnace
+										if (gui.getElementMarked() instanceof Production_Furnace) {
+											newTile = new Production_Furnace(tile, gui.getElementMarked().getFieldType(), gw.getMaterialManager());
+										} else
+											newTile = new ProductionTile(tile, gui.getElementMarked().getFieldType(), gw.getMaterialManager());
+
+										//newTile.setHooveredBorderThickness(2);
+
+										newTile.setHooveredBorderColor(Color.blue);
+										newTile.setHoovered(true);
+
+										gw.getMap().changeField(tile, newTile);
+
+										//						tile.setImage(gui.getElementMarked().getImage());
+										//						tile.setFieldType(gui.getElementMarked().getFieldType());
+										//
+										gw.getMaterialManager().subMoney(((ProductionTile) newTile).getCostOfTile());
+
+										gui.clearMarkedTile();
+										changeingTile = null;
+										tile.setHooveredBorderColor(Color.blue);
+									}
+								}
 							}
 						}
-					}
+						//Right Mousebutton
 
-					break;
+						else if (e.getButton() == MouseEvent.BUTTON3) {
+							if (changeingTile != null) {
+								gui.clearMarkedTile();
+								tile.setHooveredBorderColor(Color.blue);
+								tile.setImage(changeingTile);
+								gui.showMoneyWarning(false);
 
-				case TITLE_MENU:
+							}
+							canBuildOnActualField = false;
+						}
 
-					gw.getGameMenu().clickedAt(gw.getMousePos());
 
-					break;
+						break;
 
-                case PAUSED:
-                    gw.getPausedMenu().clickedAt(gw.getMousePosition());
-                    break;
-			}
-		}
+					case TITLE_MENU:
 
-		//Right Mousebutton
-		
-		if(e.getButton()==MouseEvent.BUTTON3) {
-			if(changeingTile!=null) {
-				gui.clearMarkedTile();
-				tile.setHooveredBorderColor(Color.blue);				
-				tile.setImage(changeingTile);
-				gui.showMoneyWarning(false);
-				
-			}
-			canBuildOnActualField= false;
-		}
+						gw.getGameMenu().clickedAt(gw.getMousePos());
+
+						break;
+
+					case PAUSED:
+						gw.getPausedMenu().clickedAt(gw.getMousePosition());
+						break;
+				}
+
+
+
+
 	}
 
 	@Override
