@@ -62,8 +62,7 @@ public class GUI implements GameObject{
 	
 	@Override
 	public void render(Graphics g) {
-		
-		
+
 		if(debugViewActive) {
 			//show FPS
 
@@ -217,5 +216,9 @@ public class GUI implements GameObject{
 		}
 		else
 			debugViewActive = true;
+	}
+
+	public void setMaterialManager(MaterialManager mm){
+		this.mm = mm;
 	}
 }

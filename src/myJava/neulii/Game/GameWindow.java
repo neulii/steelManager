@@ -102,40 +102,42 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 			public void componentHidden(ComponentEvent e) {				
 			}
 		});
-	
-		//Game Loop
-		final int FPS = 60;
-		
-		long startTime = System.nanoTime();
-		long deltaTime = 0;
-		long frameCounterTime;
-		double timePerFrame = 1000000000.0/FPS;
-		
-		int frames = 0;
-		frameCounterTime = System.currentTimeMillis();
-		
-		while(gameIsRunning) {
-			deltaTime = System.nanoTime()-startTime;
-						
-			if(deltaTime>=timePerFrame) {
-				
-				//update Methode
-				update(deltaTime);
-				
-				frames++;
-				deltaTime = 0;
-				startTime = System.nanoTime();	
-			}
-		
-			//Rendermethode
-			render(graphics);
-			
-			//Frame Counter
-			if(System.currentTimeMillis()-frameCounterTime>=1000) {
+
+		while(true) {
+			//Game Loop
+			final int FPS = 60;
+
+			long startTime = System.nanoTime();
+			long deltaTime = 0;
+			long frameCounterTime;
+			double timePerFrame = 1000000000.0 / FPS;
+
+			int frames = 0;
+			frameCounterTime = System.currentTimeMillis();
+
+			while (gameIsRunning) {
+				deltaTime = System.nanoTime() - startTime;
+
+				if (deltaTime >= timePerFrame) {
+
+					//update Methode
+					update(deltaTime);
+
+					frames++;
+					deltaTime = 0;
+					startTime = System.nanoTime();
+				}
+
+				//Rendermethode
+				render(graphics);
+
+				//Frame Counter
+				if (System.currentTimeMillis() - frameCounterTime >= 1000) {
 //				System.out.println(frames);
-				actualFrames = frames;
-				frames = 0;
-				frameCounterTime = System.currentTimeMillis();
+					actualFrames = frames;
+					frames = 0;
+					frameCounterTime = System.currentTimeMillis();
+				}
 			}
 		}
 	}
@@ -262,7 +264,7 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 
 			savedObjects = (ArrayList<Serializable>) in.readObject();
 
-			//System.out.println(savedObjects.size());
+			System.out.println(savedObjects.size());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -272,12 +274,12 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 			e.printStackTrace();
 		}
 
-		mapString = (int[]) savedObjects.get(0);
+		this.mapString = (int[]) savedObjects.get(0);
 
-		//Utils.printArrayToConsole(mapString);
+		Utils.printArrayToConsole(mapString);
 
-		//System.out.println(mapString);
 		mm = (MaterialManager) savedObjects.get(1);
+
 
 		mm.viewToConsole();
 
@@ -291,7 +293,12 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 		gameMap = new Map(MAPWIDTH,MAPHEIGHT,TILE_WIDTH,TILE_HEIGHT,mapString);
 		gameMap.setGameWindow(this);
 
+		gui = new GUI(this,mm);
+
+		mousePosition = new Point(0,0);
 		System.out.println("loadgame");
+
+		gameIsRunning = true;
 
 		setGameState(GameState.MAINGAME);
 
