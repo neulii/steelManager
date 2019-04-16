@@ -266,12 +266,8 @@ public class Map implements GameObject, Serializable{
 	public void changeField(final Tile oldField,final Tile newField) {
 		int index = mapTiles.indexOf(oldField);
 
-		for(int i = 0;i<mapString.length;i++){
+		mapString[index] = newField.getFieldType().value;
 
-			mapString[i] = mapTiles.get(i).getFieldType().getInt();
-			if(mapTiles.get(i).getFieldType().getInt()!=0)
-				System.out.println(mapTiles.get(i).getFieldType().getInt());
-		}
 		mapTiles.set(index, newField);
 	}
 	

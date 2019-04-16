@@ -84,9 +84,10 @@ public class MaterialManager implements Serializable {
 	}
 
 	public void viewToConsole(){
-		System.out.println("money:   " + money);
-		System.out.println("coal:    " + coal);
-		System.out.println("ironOre: " + iron_ore);
+		System.out.println("money:    " + money);
+		System.out.println("coal:     " + coal);
+		System.out.println("ironOre:  " + iron_ore);
+		System.out.println("raw_iron: " + raw_Iron);
 
 
 	}

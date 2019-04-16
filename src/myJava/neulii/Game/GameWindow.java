@@ -262,7 +262,7 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 
 			savedObjects = (ArrayList<Serializable>) in.readObject();
 
-			System.out.println(savedObjects.size());
+			//System.out.println(savedObjects.size());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -274,9 +274,9 @@ public class GameWindow extends Canvas implements GameObject, Serializable {
 
 		mapString = (int[]) savedObjects.get(0);
 
-		Utils.printArrayToConsole(mapString);
+		//Utils.printArrayToConsole(mapString);
 
-		System.out.println(mapString);
+		//System.out.println(mapString);
 		mm = (MaterialManager) savedObjects.get(1);
 
 		mm.viewToConsole();
